@@ -669,7 +669,10 @@ class ArrSyncEngine:
             **self.cfg,
         }
 
-        if self.type in ("sonarr", "radarr"):
+        if self.type in ("sonarr", "radarr") and (
+            self.cfg["customFormat"] is not None
+            or self.cfg["qualityProfile"] is not None
+        ):
             self.cfg = self.format_compiler.compile_formats(self.cfg)
 
         self.sync_tags()
